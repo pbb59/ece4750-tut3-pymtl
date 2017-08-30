@@ -21,7 +21,7 @@ class RegIncr( Model ):
     # Sequential logic
 
     s.reg_out = Wire( Bits(8) )
-
+    #block1 is func/module that is called on every rising edge
     @s.tick
     def block1():
       if s.reset:
@@ -29,6 +29,15 @@ class RegIncr( Model ):
       else:
         s.reg_out.next = s.in_
 
+    #block2 is func that is called whenever any input signal changes
+    @s.combinational
+    def block2():
+      s.out.value = s.reg_out + 1
+
+
+  def line_trace( s ):
+    return "{} ({}) {}".format( s.in_, s.reg_out, s.out )
+      
     # ''' TUTORIAL TASK ''''''''''''''''''''''''''''''''''''''''''''''''''
     # This model is incomplete. As part of the tutorial you will insert a
     # combinational concurrent block here to model the incrementer logic,

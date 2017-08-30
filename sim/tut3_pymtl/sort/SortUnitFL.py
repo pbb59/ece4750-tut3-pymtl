@@ -18,6 +18,7 @@ class SortUnitFL( Model ):
     s.out_val = OutPort(1)
     s.out     = [ OutPort (nbits) for x in range(4) ]
 
+	#this is high level python code, not an actual hardware implementation
     @s.tick_fl
     def block():
       s.out_val.next = s.in_val
